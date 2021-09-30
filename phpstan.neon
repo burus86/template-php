@@ -1,0 +1,11 @@
+parameters:
+    level: max
+    paths:
+        - src
+        - tests
+    excludes_analyse:
+        - tests/bootstrap.php
+    #checkMissingIterableValueType: false
+    #checkGenericClassInNonGenericObjectType: false
+    #inferPrivatePropertyTypeFromConstructor: true
+    #ignoreErrors:

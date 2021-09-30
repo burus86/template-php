@@ -1,0 +1,19 @@
+version: "3.7"
+services:
+    php:
+        container_name: template-php
+        build: .
+        ports:
+            - 8080:8080
+        volumes:
+            - ../:/var/www/
+        networks:
+            - base
+        secrets:
+            - host_ssh_key
+        command: symfony serve --port=8080
+networks:
+    base:
+secrets:
+    host_ssh_key:
+        file: ~/.ssh/id_rsa_personal_github
