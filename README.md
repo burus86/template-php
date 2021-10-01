@@ -20,8 +20,9 @@
 
 ## About project
 - [x] PHP 8
-- [x] Installed Code Quality Checker Tools: PHP_CodeSniffer, PHPStan, PHP Mess Detector, PHP Magic Number Detector, PHP Copy Paste Detector, Churn-php, PhpDeprecationDetector
-- [x] Installed Code Analysis Tools: Deptrac
+- [x] Docker
+- [x] Code Quality Checker Tools: PHP_CodeSniffer, PHPStan, PHP Mess Detector, PHP Magic Number Detector, PHP Copy Paste Detector, Churn-php, PhpDeprecationDetector
+- [x] Code Analysis Tools: Deptrac
 
 ## Set up project
 
@@ -44,9 +45,9 @@ Install composer dependencies:
 
 ### Configure environment variables
 
-Rename filename `.env.dist` as `.env` and edit parameters.
+Copy filename `.env.dist` as `.env` and edit parameters for test environment.
 
-Open filename `.env.test` and edit parameters.
+Copy filename `.env.dist` as `.env.test` and edit parameters for test environment.
 
 ### Run project
 

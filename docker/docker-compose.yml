@@ -16,4 +16,4 @@ networks:
     base:
 secrets:
     host_ssh_key:
-        file: ~/.ssh/id_rsa_personal_github
+        file: ~/.ssh/id_rsa
