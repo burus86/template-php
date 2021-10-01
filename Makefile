@@ -5,15 +5,14 @@
 .PHONY: help install start stop test
 CONTAINER_NAME		= template-php
 CONTAINER_OPTIONS	= -it
-CONTAINER_EXISTS	= docker ps -q -f name=$(CONTAINER_NAME)
 RUN					= docker exec $(CONTAINER_OPTIONS) $(CONTAINER_NAME)
-PHPUNIT_FILE		= phpunit.xml.dist
+#PHPUNIT_FILE		= phpunit.xml.dist
 PHPMD_FILE			= phpmd.xml
 PHPSTAN_FILE		= phpstan.neon
 CHURN_FILE			= churn.yml
-COLOR_RESET   = \033[0m
-COLOR_INFO    = \033[32m
-COLOR_COMMENT = \033[33m
+COLOR_RESET			= \033[0m
+COLOR_INFO			= \033[32m
+COLOR_COMMENT		= \033[33m
 
 
 ## Help
@@ -31,13 +30,6 @@ help:
 	} \
 	{ lastLine = $$0 }' $(MAKEFILE_LIST)
 
-## Install PHP application
-install: composer.json $(wildcard composer.lock)
-	@echo "Installing PHP dependencies"
-	@echo "---------------------------"
-	@echo
-	$(RUN) composer install
-
 ## Start PHP application
 start:
 	@echo "Starting PHP application"
@@ -52,8 +44,15 @@ stop:
 	@echo
 	docker stop $(CONTAINER_NAME)
 
+## Install PHP application
+install: start composer.json $(wildcard composer.lock)
+	@echo "Installing PHP dependencies"
+	@echo "---------------------------"
+	@echo
+	$(RUN) composer install
+
 ## Run all tests (unit tests, code style, etc.)
-test:
+test: start
 	@echo "Run PHP Unit Tests"
 	@echo "---------------------------"
 	@echo
@@ -68,7 +67,7 @@ test:
 	@echo "Run PHPStan"
 	@echo "---------------------------"
 	@echo
-	$(RUN) vendor/bin/phpstan analyse -c $(PHPSTAN_FILE) # FIXME
+	$(RUN) vendor/bin/phpstan analyse -c $(PHPSTAN_FILE)
 	@echo
 	@echo "Run PHP Mess Detector"
 	@echo "---------------------------"
