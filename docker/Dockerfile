@@ -16,7 +16,16 @@ RUN apt-get update && apt-get install -y \
         mysqli \
         pdo \
         pdo_mysql \
-        bz2
+        bz2 \
+    && docker-php-ext-enable opcache
+
+# Install OPcache
+COPY php/conf.d/opcache.ini /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini
+
+# Install APCu
+RUN pecl install apcu \
+    && docker-php-ext-enable apcu
+COPY php/conf.d/apcu.ini /usr/local/etc/php/conf.d/docker-php-ext-apcu.ini
 
 RUN apt-get install -y zlib1g-dev libicu-dev g++ \
     && docker-php-ext-configure intl \

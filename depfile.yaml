@@ -1,7 +1,7 @@
-#paths:
-#    - ./src
-#exclude_files:
-#    - .*tests.*
+paths:
+    - ./src
+exclude_files:
+    - .*tests.*
 #layers:
 #    -
 #        name: Domain
