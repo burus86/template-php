@@ -44,9 +44,9 @@ Install composer dependencies:
 
 ### Configure environment variables
 
-Rename filename `.env.dist` as `.env` and edit parameters.
+Copy filename `.env.dist` as `.env` and edit parameters for test environment.
 
-Open filename `.env.test` and edit parameters.
+Copy filename `.env.dist` as `.env.test` and edit parameters for test environment.
 
 ### Run project
 
