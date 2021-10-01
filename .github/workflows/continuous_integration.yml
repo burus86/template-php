@@ -15,9 +15,9 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "composer"
-  composer:
-    name: Composer
+  # This workflow contains a single job called "build"
+  build:
+    name: Build project
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     # Steps represent a sequence of tasks that will be executed as part of the job
@@ -25,21 +25,13 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       # Runs single commands using the runners shell
-      - name: Install dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest
+      - run: composer validate --strict
+      - run: composer install --prefer-dist --no-progress --no-suggest
 
-  tests:
-    name: Run PHP tests
-    runs-on: ubuntu-latest
-    steps:
       - name: PHP Unit tests
         if: ${{ always() }}
         run: vendor/bin/phpunit
 
-  quality:
-    name: Code Quality Checker Tools
-    runs-on: ubuntu-latest
-    steps:
       - name: PHP Code Sniffer
         if: ${{ always() }}
         run: vendor/bin/phpcs src/ tests/
@@ -60,18 +52,14 @@ jobs:
         if: ${{ always() }}
         run: vendor/bin/phpcpd ./ --exclude=var --exclude=vendor --fuzzy --min-lines=5
 
-      - name: Churn-php
-        if: ${{ always() }}
-        run: vendor/bin/churn run --configuration=churn.yml
+#      - name: Churn-php
+#        if: ${{ always() }}
+#        run: vendor/bin/churn run --configuration=churn.yml
 
       - name: PhpDeprecationDetector
         if: ${{ always() }}
         run: php bin/phpdd src/ tests/
 
-  analysis:
-    name: Code Analysis Tools
-    runs-on: ubuntu-latest
-    steps:
       - name: Deptrac
         if: ${{ always() }}
         run: vendor/bin/deptrac analyse

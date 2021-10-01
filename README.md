@@ -52,48 +52,49 @@ Open filename `.env.test` and edit parameters.
 
 Finally, you can see the web under [http://localhost:8080/](http://localhost:8080/) in your favorite web browser.
 
+![Captura](public/images/phpinfo.png)
+
 ## Run Tests
 
 ### [PHP Unit](https://github.com/sebastianbergmann/phpunit)
 
-    vendor/bin/phpunit
+    docker exec -it template-php vendor/bin/phpunit
 
 ## Code Quality Checker Tools
 
 ### [PHP_CodeSniffer](https://github.com/squizlabs/php_codesniffer)
 
-    vendor/bin/phpcs src/ tests/
-    vendor/bin/phpcbf src/ tests/
+    docker exec -it template-php vendor/bin/phpcs src/ tests/
+    docker exec -it template-php vendor/bin/phpcbf src/ tests/
 
 ### [PHPStan](https://github.com/phpstan/phpstan)
 
-    vendor/bin/phpstan analyse -c phpstan.neon
-    vendor/bin/phpstan analyse -l 8 src tests --generate-baseline
+    docker exec -it template-php vendor/bin/phpstan analyse -c phpstan.neon
 
 ### [PHP Mess Detector](https://github.com/phpmd/phpmd)
 
-    vendor/bin/phpmd src/ text phpmd.xml
+    docker exec -it template-php vendor/bin/phpmd src/ text phpmd.xml
 
 ### [PHP Magic Number Detector](https://github.com/povils/phpmnd)
 
-    vendor/bin/phpmnd src tests --progress --extensions=all
+    docker exec -it template-php vendor/bin/phpmnd src tests --progress --extensions=all
 
 ### [PHP Copy Paste Detector](https://github.com/sebastianbergmann/phpcpd)
 
-    vendor/bin/phpcpd ./ --exclude=var --exclude=vendor --fuzzy --min-lines=5
+    docker exec -it template-php vendor/bin/phpcpd ./ --exclude=var --exclude=vendor --fuzzy --min-lines=5
 
 ### [Churn-php](https://github.com/bmitch/churn-php)
 
 `churn-php` is a package that helps you identify php files in your project that could be good candidates for refactoring.
 
-    vendor/bin/churn run --configuration=churn.yml
+    docker exec -it template-php vendor/bin/churn run --configuration=churn.yml
 
 ### [PhpDeprecationDetector](https://github.com/wapmorgan/PhpDeprecationDetector)
 
-    php bin/phpdd src/ tests/
+    docker exec -it template-php php bin/phpdd src/ tests/
 
 ## Code Analysis Tools
 
 ### [Deptrac](https://github.com/qossmic/deptrac)
 
-    vendor/bin/deptrac analyse
+    docker exec -it template-php vendor/bin/deptrac analyse
