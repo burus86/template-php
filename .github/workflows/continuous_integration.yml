@@ -30,31 +30,31 @@ jobs:
 
       - name: PHP Unit tests
         if: ${{ always() }}
-        run: vendor/bin/phpunit
+        run: bin/phpunit
 
       - name: PHP Code Sniffer
         if: ${{ always() }}
-        run: vendor/bin/phpcs src/ tests/
+        run: bin/phpcs src/ tests/
 
       - name: PHP Stan
         if: ${{ always() }}
-        run: vendor/bin/phpstan analyse -c phpstan.neon
+        run: bin/phpstan analyse -c phpstan.neon
 
       - name: PHP Mess Detector
         if: ${{ always() }}
-        run: vendor/bin/phpmd src/ text phpmd.xml
+        run: bin/phpmd src/ text phpmd.xml
 
       - name: PHP Magic Number Detector
         if: ${{ always() }}
-        run: vendor/bin/phpmnd src tests --progress --extensions=all
+        run: bin/phpmnd src tests --progress --extensions=all
 
       - name: PHP Copy Paste Detector (PHPCPD)
         if: ${{ always() }}
-        run: vendor/bin/phpcpd ./ --exclude=var --exclude=vendor --fuzzy --min-lines=5
+        run: bin/phpcpd ./ --exclude=var --exclude=vendor --fuzzy --min-lines=5
 
 #      - name: Churn-php
 #        if: ${{ always() }}
-#        run: vendor/bin/churn run --configuration=churn.yml
+#        run: bin/churn run --configuration=churn.yml
 
       - name: PhpDeprecationDetector
         if: ${{ always() }}
@@ -62,4 +62,4 @@ jobs:
 
       - name: Deptrac
         if: ${{ always() }}
-        run: vendor/bin/deptrac analyse
+        run: bin/deptrac analyse
