@@ -44,58 +44,75 @@ stop:
 	@echo
 	docker stop $(CONTAINER_NAME)
 
-## Install PHP application
+## Install PHP dependencies
 install: start composer.json $(wildcard composer.lock)
 	@echo "Installing PHP dependencies"
 	@echo "---------------------------"
 	@echo
 	$(RUN) composer install
 
+## Update PHP dependencies
+update: start composer.json $(wildcard composer.lock)
+	@echo "Updating PHP dependencies"
+	@echo "---------------------------"
+	@echo
+	$(RUN) composer update
+
 ## Run all tests (unit tests, code style, etc.)
 test: start
 	@echo "Run PHP Unit Tests"
 	@echo "---------------------------"
 	@echo
-	$(RUN) vendor/bin/phpunit
+	$(RUN) bin/phpunit
+	@echo
+	@echo "Run Behat Tests"
+	@echo "---------------------------"
+	@echo
+	$(RUN) bin/behat
+	@echo
+	@echo "Run Behat Tests"
+	@echo "---------------------------"
+	@echo
+	$(RUN) vendor/bin/behat
 	@echo
 	@echo "Run PHP_CodeSniffer"
 	@echo "---------------------------"
 	@echo
-	$(RUN) vendor/bin/phpcs src/ tests/
-	#$(RUN) vendor/bin/phpcbf src/ tests/
+	$(RUN) bin/phpcs src/ tests/
+	#$(RUN) bin/phpcbf src/ tests/
 	@echo
 	@echo "Run PHPStan"
 	@echo "---------------------------"
 	@echo
-	$(RUN) vendor/bin/phpstan analyse -c $(PHPSTAN_FILE)
+	$(RUN) bin/phpstan analyse -c $(PHPSTAN_FILE)
 	@echo
 	@echo "Run PHP Mess Detector"
 	@echo "---------------------------"
 	@echo
-	$(RUN) vendor/bin/phpmd src/ text $(PHPMD_FILE)
+	$(RUN) bin/phpmd src/ text $(PHPMD_FILE)
 	@echo
 	@echo "Run PHP Magic Number Detector"
 	@echo "---------------------------"
 	@echo
-	$(RUN) vendor/bin/phpmnd src tests --progress --extensions=all
+	$(RUN) bin/phpmnd src tests --progress --extensions=all
 	@echo
 	@echo "Run PHP Copy Paste Detector"
 	@echo "---------------------------"
 	@echo
-	$(RUN) vendor/bin/phpcpd ./ --exclude=var --exclude=vendor --fuzzy --min-lines=5
+	$(RUN) bin/phpcpd ./ --exclude=var --exclude=vendor --fuzzy --min-lines=5
 	@echo
 	@echo "Run Churn-php"
 	@echo "---------------------------"
 	@echo
-	$(RUN) vendor/bin/churn run --configuration=$(CHURN_FILE)
+	$(RUN) bin/churn run --configuration=$(CHURN_FILE)
 	@echo
 	@echo "Run PhpDeprecationDetector"
 	@echo "---------------------------"
 	@echo
-	$(RUN) php bin/phpdd src/ tests/
+	$(RUN) bin/phpdd src/ tests/
 	@echo
 	@echo "Run Deptrac"
 	@echo "---------------------------"
 	@echo
-	$(RUN) vendor/bin/deptrac analyse
+	$(RUN) bin/deptrac analyse
 	@echo

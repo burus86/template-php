@@ -21,6 +21,10 @@
             "App\\Tests\\": "tests/"
         }
     },
+    "config": {
+        "bin-dir": "bin/",
+        "sort-packages": true
+    },
     "require": {
         "php": ">=8.0",
         "ext-ctype": "*",
@@ -29,6 +33,7 @@
         "symfony/dotenv": "4.4.*"
     },
     "require-dev": {
+        "behat/behat": "^3.8",
         "bmitch/churn-php": "^1.5",
         "phpmd/phpmd": "^2.10",
         "phpstan/phpstan": "^0.12.93",
