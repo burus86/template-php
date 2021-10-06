@@ -44,12 +44,19 @@ stop:
 	@echo
 	docker stop $(CONTAINER_NAME)
 
-## Install PHP application
+## Install PHP dependencies
 install: start composer.json $(wildcard composer.lock)
 	@echo "Installing PHP dependencies"
 	@echo "---------------------------"
 	@echo
 	$(RUN) composer install
+
+## Update PHP dependencies
+update: start composer.json $(wildcard composer.lock)
+	@echo "Updating PHP dependencies"
+	@echo "---------------------------"
+	@echo
+	$(RUN) composer update
 
 ## Run all tests (unit tests, code style, etc.)
 test: start
@@ -57,6 +64,11 @@ test: start
 	@echo "---------------------------"
 	@echo
 	$(RUN) vendor/bin/phpunit
+	@echo
+	@echo "Run Behat Tests"
+	@echo "---------------------------"
+	@echo
+	$(RUN) vendor/bin/behat
 	@echo
 	@echo "Run PHP_CodeSniffer"
 	@echo "---------------------------"

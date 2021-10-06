@@ -7,6 +7,8 @@
    * [Execute all tests](#execute-all-tests)
 1. [Unit Tests](#unit-tests)
    * [PHP Unit](#php-unit)
+1. [Functional Tests](#functional-tests)
+    * [Behat](#behat)
 1. [Code Quality Checker Tools](#code-quality-checker-tools)
    * [PHP_CodeSniffer](#php_codesniffer)
    * [PHPStan](#phpstan)
@@ -22,7 +24,8 @@
 - [x] PHP 8
 - [x] Docker
 - [x] Makefile
-- [x] PHP Unit
+- [x] Unit tests: PHP Unit
+- [x] Functional tests: Behat
 - [x] Code Quality Checker Tools: PHP_CodeSniffer, PHPStan, PHP Mess Detector, PHP Magic Number Detector, PHP Copy Paste Detector, Churn-php, PhpDeprecationDetector
 - [x] Code Analysis Tools: Deptrac
 
@@ -62,6 +65,12 @@ If you prefer, it's also possible to run each individual test following the inst
 ### [PHP Unit](https://github.com/sebastianbergmann/phpunit)
 
     docker exec -it template-php vendor/bin/phpunit
+
+## Functional Tests
+
+### [Behat](https://github.com/Behat/Behat)
+
+    docker exec -it template-php vendor/bin/behat
 
 ## Code Quality Checker Tools
 
