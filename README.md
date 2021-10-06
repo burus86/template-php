@@ -3,9 +3,9 @@
 1. [About project](#about-project)
 1. [Set up project](#set-up-project)
    * [Installation](#installation)
-   * [Configure environment variables](#configure-environment-variables)
-   * [Run project](#run-project)
-1. [Run Tests](#run-tests)
+   * [Execute project](#execute-project)
+   * [Execute all tests](#execute-all-tests)
+1. [Unit Tests](#unit-tests)
    * [PHP Unit](#php-unit)
 1. [Code Quality Checker Tools](#code-quality-checker-tools)
    * [PHP_CodeSniffer](#php_codesniffer)
@@ -21,41 +21,43 @@
 ## About project
 - [x] PHP 8
 - [x] Docker
+- [x] Makefile
+- [x] PHP Unit
 - [x] Code Quality Checker Tools: PHP_CodeSniffer, PHPStan, PHP Mess Detector, PHP Magic Number Detector, PHP Copy Paste Detector, Churn-php, PhpDeprecationDetector
 - [x] Code Analysis Tools: Deptrac
 
 ## Set up project
-
-If not already done, [install Docker Compose](https://docs.docker.com/compose/install/) before continue with installation
 
 ### Installation
 
 Clone repository:
 
     git clone https://github.com/burus86/template-php.git
+    cd template-php
 
 Build and up docker containers:
 
-    cd template-php
-    docker-compose -f docker/docker-compose.yml up -d --build
+    make start
 
 Install composer dependencies:
 
-    docker exec -it template-php composer install
+    make install
 
-### Configure environment variables
+### Execute project
 
-Copy filename `.env.dist` as `.env` and edit parameters for test environment.
-
-Copy filename `.env.dist` as `.env.test` and edit parameters for test environment.
-
-### Run project
-
-Finally, you can see the web under [http://localhost:8080/](http://localhost:8080/) in your favorite web browser.
+Open in your favorite web browser the website [http://localhost:8080/](http://localhost:8080/).
 
 ![Captura](public/images/phpinfo.png)
 
-## Run Tests
+### Execute all tests
+
+To run all the tests (unit tests, code quality checker tools and code analysis tools), just execute the command:
+
+    make test
+
+If you prefer, it's also possible to run each individual test following the instructions below.
+
+## Unit Tests
 
 ### [PHP Unit](https://github.com/sebastianbergmann/phpunit)
 

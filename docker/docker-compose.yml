@@ -15,5 +15,6 @@ services:
 networks:
     base:
 secrets:
+    # see https://docs.docker.com/engine/swarm/secrets/#build-support-for-docker-secrets-into-your-images
     host_ssh_key:
         file: ~/.ssh/id_rsa
