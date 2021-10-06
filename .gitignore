@@ -1,6 +1,8 @@
 /.env
 /.env.local
 /.env.*.local
+/bin/*
+!/bin/cache
 /var/
 /vendor/
 /.idea/

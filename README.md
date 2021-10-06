@@ -64,7 +64,13 @@ If you prefer, it's also possible to run each individual test following the inst
 
 ### [PHP Unit](https://github.com/sebastianbergmann/phpunit)
 
-    docker exec -it template-php vendor/bin/phpunit
+    docker exec -it template-php bin/phpunit
+
+## Functional Tests
+
+### [Behat](https://github.com/Behat/Behat)
+
+    docker exec -it template-php bin/behat
 
 ## Functional Tests
 
@@ -76,30 +82,30 @@ If you prefer, it's also possible to run each individual test following the inst
 
 ### [PHP_CodeSniffer](https://github.com/squizlabs/php_codesniffer)
 
-    docker exec -it template-php vendor/bin/phpcs src/ tests/
-    docker exec -it template-php vendor/bin/phpcbf src/ tests/
+    docker exec -it template-php bin/phpcs src/ tests/
+    docker exec -it template-php bin/phpcbf src/ tests/
 
 ### [PHPStan](https://github.com/phpstan/phpstan)
 
-    docker exec -it template-php vendor/bin/phpstan analyse -c phpstan.neon
+    docker exec -it template-php bin/phpstan analyse -c phpstan.neon
 
 ### [PHP Mess Detector](https://github.com/phpmd/phpmd)
 
-    docker exec -it template-php vendor/bin/phpmd src/ text phpmd.xml
+    docker exec -it template-php bin/phpmd src/ text phpmd.xml
 
 ### [PHP Magic Number Detector](https://github.com/povils/phpmnd)
 
-    docker exec -it template-php vendor/bin/phpmnd src tests --progress --extensions=all
+    docker exec -it template-php bin/phpmnd src tests --progress --extensions=all
 
 ### [PHP Copy Paste Detector](https://github.com/sebastianbergmann/phpcpd)
 
-    docker exec -it template-php vendor/bin/phpcpd ./ --exclude=var --exclude=vendor --fuzzy --min-lines=5
+    docker exec -it template-php bin/phpcpd ./ --exclude=var --exclude=vendor --fuzzy --min-lines=5
 
 ### [Churn-php](https://github.com/bmitch/churn-php)
 
 `churn-php` is a package that helps you identify php files in your project that could be good candidates for refactoring.
 
-    docker exec -it template-php vendor/bin/churn run --configuration=churn.yml
+    docker exec -it template-php bin/churn run --configuration=churn.yml
 
 ### [PhpDeprecationDetector](https://github.com/wapmorgan/PhpDeprecationDetector)
 
@@ -109,4 +115,4 @@ If you prefer, it's also possible to run each individual test following the inst
 
 ### [Deptrac](https://github.com/qossmic/deptrac)
 
-    docker exec -it template-php vendor/bin/deptrac analyse
+    docker exec -it template-php bin/deptrac analyse
