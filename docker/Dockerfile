@@ -19,6 +19,8 @@ RUN apt-get update && apt-get install -y \
         bz2 \
     && docker-php-ext-enable opcache
 
+COPY php/php.ini /usr/local/etc/php/php.ini
+
 # Install OPcache
 COPY php/conf.d/opcache.ini /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini
 
