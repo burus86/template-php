@@ -3,6 +3,7 @@
 # variables
 .DEFAULT_GOAL := help
 .PHONY: help install start stop test
+CONTAINERS		= template-php
 CONTAINER_NAME		= template-php
 CONTAINER_OPTIONS	= -it
 RUN					= docker exec $(CONTAINER_OPTIONS) $(CONTAINER_NAME)
@@ -42,7 +43,7 @@ stop:
 	@echo "Stopping PHP application"
 	@echo "---------------------------"
 	@echo
-	docker stop $(CONTAINER_NAME)
+	docker stop $(CONTAINERS)
 
 ## Install PHP dependencies
 install: start composer.json $(wildcard composer.lock)

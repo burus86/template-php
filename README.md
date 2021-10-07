@@ -54,9 +54,9 @@ Open in your favorite web browser the website [http://localhost:8080/](http://lo
 
 ### Execute all tests
 
-To run all the tests (unit tests, code quality checker tools and code analysis tools), just execute the command:
+To run all the tests (unit tests, functional tests, code quality checker tools and code analysis tools), just execute the command `make test` with [option -i or --ignore-errors](https://www.gnu.org/software/make/manual/make.html#Options-Summary):
 
-    make test
+    make test -i
 
 If you prefer, it's also possible to run each individual test following the instructions below.
 
