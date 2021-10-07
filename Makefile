@@ -70,11 +70,6 @@ test: start
 	@echo
 	$(RUN) bin/behat
 	@echo
-	@echo "Run Behat Tests"
-	@echo "---------------------------"
-	@echo
-	$(RUN) vendor/bin/behat
-	@echo
 	@echo "Run PHP_CodeSniffer"
 	@echo "---------------------------"
 	@echo

@@ -72,12 +72,6 @@ If you prefer, it's also possible to run each individual test following the inst
 
     docker exec -it template-php bin/behat
 
-## Functional Tests
-
-### [Behat](https://github.com/Behat/Behat)
-
-    docker exec -it template-php vendor/bin/behat
-
 ## Code Quality Checker Tools
 
 ### [PHP_CodeSniffer](https://github.com/squizlabs/php_codesniffer)
@@ -109,7 +103,7 @@ If you prefer, it's also possible to run each individual test following the inst
 
 ### [PhpDeprecationDetector](https://github.com/wapmorgan/PhpDeprecationDetector)
 
-    docker exec -it template-php php bin/phpdd src/ tests/
+    docker exec -it template-php bin/phpdd src/ tests/
 
 ## Code Analysis Tools
 
