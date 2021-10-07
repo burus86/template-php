@@ -43,4 +43,3 @@ WORKDIR /var/www/
 EXPOSE 8080
 
 RUN ls -lisa /var/www
-RUN mkdir ~/.ssh && ln -s /run/secrets/host_ssh_key ~/.ssh/id_rsa

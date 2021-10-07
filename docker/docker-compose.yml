@@ -9,8 +9,6 @@ services:
       - ../:/var/www/
     networks:
       - base
-    secrets:
-      - host_ssh_key
     command: symfony serve --port=8080
     healthcheck:
       test: curl --fail -s http://localhost:8080 || exit 1
@@ -20,7 +18,3 @@ services:
       start_period: 30s
 networks:
   base:
-secrets:
-  # see https://docs.docker.com/engine/swarm/secrets/#build-support-for-docker-secrets-into-your-images
-  host_ssh_key:
-    file: ~/.ssh/id_rsa

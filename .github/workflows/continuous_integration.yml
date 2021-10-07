@@ -5,9 +5,13 @@ name: Continuous Integration
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for certain branches
-  # TODO: remove comment
-  #push:
-  #  branches: [ dev ]
+  push:
+    branches:
+      - dev
+      - ft/*
+      - hotfix/*
+      - tmp/*
+      - v1.*
   pull_request:
     branches: [ main ]
 
@@ -29,9 +33,15 @@ jobs:
       - run: composer validate --strict
       - run: composer install --prefer-dist --no-progress --no-suggest
 
+      - name: Pull images
+        run: docker-compose -f docker/docker-compose.yml pull --ignore-pull-failures || true
+
+      - name: Start services
+        run: docker-compose -f docker/docker-compose.yml up -d --build
+
       - name: Wait for services
         run: |
-          while status="$(docker inspect --format="{{if .Config.Healthcheck}}{{print .State.Health.Status}}{{end}}" "$(docker-compose ps -q php)")"; do
+          while status="$(docker inspect --format="{{if .Config.Healthcheck}}{{print .State.Health.Status}}{{end}}" "$(docker-compose -f docker/docker-compose.yml ps -q php)")"; do
             case $status in
               starting) sleep 1;;
               healthy) exit 0;;
@@ -45,10 +55,7 @@ jobs:
           exit 1
 
       - name: Check HTTP reachability
-        run: curl http://localhost:8080
-
-      - name: Check HTTPS reachability
-        run: curl -k https://localhost:8080
+        run: curl -v -o /dev/null http://localhost:8080
 
       - name: PHP Unit tests
         if: ${{ always() }}
