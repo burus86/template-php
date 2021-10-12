@@ -85,9 +85,9 @@ jobs:
         if: ${{ always() }}
         run: bin/phpcpd ./ --exclude=var --exclude=vendor --fuzzy --min-lines=5
 
-#      - name: Churn-php
-#        if: ${{ always() }}
-#        run: bin/churn run --configuration=churn.yml
+      - name: Churn-php
+        if: ${{ always() }}
+        run: bin/churn run --configuration=churn.yml
 
       - name: PhpDeprecationDetector
         if: ${{ always() }}

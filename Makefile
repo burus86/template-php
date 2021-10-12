@@ -1,20 +1,22 @@
-## see https://www.gnu.org/prep/standards/html_node/Makefile-Conventions.html
+## see:
+## 		https://www.gnu.org/software/make/manual/html_node/index.html
+## 		https://www.gnu.org/prep/standards/html_node/Makefile-Conventions.html
+## 		https://docs.php.earth/interop/make/
 
 # variables
 .DEFAULT_GOAL := help
-.PHONY: help install start stop test
-CONTAINERS		= template-php
-CONTAINER_NAME		= template-php
-CONTAINER_OPTIONS	= -it
-RUN					= docker exec $(CONTAINER_OPTIONS) $(CONTAINER_NAME)
-#PHPUNIT_FILE		= phpunit.xml.dist
-PHPMD_FILE			= phpmd.xml
-PHPSTAN_FILE		= phpstan.neon
-CHURN_FILE			= churn.yml
-COLOR_RESET			= \033[0m
-COLOR_INFO			= \033[32m
-COLOR_COMMENT		= \033[33m
-
+.PHONY : help start stop install update require bash logs test
+CONTAINERS = template-php
+CONTAINER_NAME = template-php
+CONTAINER_OPTIONS = -it
+RUN = docker exec $(CONTAINER_OPTIONS) $(CONTAINER_NAME)
+#PHPUNIT_FILE = phpunit.xml.dist
+PHPMD_FILE = phpmd.xml
+PHPSTAN_FILE = phpstan.neon
+CHURN_FILE = churn.yml
+COLOR_RESET = \033[0m
+COLOR_INFO = \033[32m
+COLOR_COMMENT = \033[33m
 
 ## Help
 help:
@@ -59,54 +61,113 @@ update: start composer.json $(wildcard composer.lock)
 	@echo
 	$(RUN) composer update
 
+## Require new PHP dependencies
+require: start composer.json
+	@echo "Require new PHP dependencies:"
+	@echo "---------------------------"
+	@echo "[EXAMPLE] $ make require PACKAGE_NAME=emuse/behat-html-formatter PACKAGE_ENV=--dev"
+	@echo
+	$(RUN) composer require $(PACKAGE_ENV) $(PACKAGE_NAME)
+
+## Access docker container bash
+bash: start
+	@echo "Access docker container bash"
+	@echo "---------------------------"
+	@echo
+	$(RUN) bash
+
+## Show docker container logs
+logs: start
+	@echo "Show docker container logs"
+	@echo "---------------------------"
+	@echo
+	docker logs -f $(CONTAINER_NAME)
+
 ## Run all tests (unit tests, code style, etc.)
-test: start
+test: start test-phpunit test-behat test-phpcs test-phpstan test-phpmd test-phpmnd test-phpcpd test-churn test-phpdd test-deptrac
+
+## Run PHP Unit Tests
+test-phpunit: start
 	@echo "Run PHP Unit Tests"
 	@echo "---------------------------"
 	@echo
 	$(RUN) bin/phpunit
 	@echo
+
+## Run Behat Tests
+test-behat: start
 	@echo "Run Behat Tests"
 	@echo "---------------------------"
 	@echo
 	$(RUN) bin/behat
 	@echo
-	@echo "Run PHP_CodeSniffer"
+
+## Run PHP_CodeSniffer and detect violations of a defined coding standard
+test-phpcs: start
+	@echo "Run PHP_CodeSniffer: phpcs"
 	@echo "---------------------------"
 	@echo
 	$(RUN) bin/phpcs src/ tests/
-	#$(RUN) bin/phpcbf src/ tests/
 	@echo
+
+## Run PHP_CodeSniffer and automatically correct coding standard violations
+test-phpcbf: start
+	@echo "Run PHP_CodeSniffer: phpcbf"
+	@echo "---------------------------"
+	@echo
+	$(RUN) bin/phpcbf src/ tests/
+	@echo
+
+## Run PHPStan
+test-phpstan: start
 	@echo "Run PHPStan"
 	@echo "---------------------------"
 	@echo
 	$(RUN) bin/phpstan analyse -c $(PHPSTAN_FILE)
 	@echo
+
+## Run PHP Mess Detector
+test-phpmd: start
 	@echo "Run PHP Mess Detector"
 	@echo "---------------------------"
 	@echo
 	$(RUN) bin/phpmd src/ text $(PHPMD_FILE)
 	@echo
+
+## Run PHP Magic Number Detector
+test-phpmnd: start
 	@echo "Run PHP Magic Number Detector"
 	@echo "---------------------------"
 	@echo
 	$(RUN) bin/phpmnd src tests --progress --extensions=all
 	@echo
+
+## Run PHP Copy Paste Detector
+test-phpcpd: start
 	@echo "Run PHP Copy Paste Detector"
 	@echo "---------------------------"
 	@echo
 	$(RUN) bin/phpcpd ./ --exclude=var --exclude=vendor --fuzzy --min-lines=5
 	@echo
+
+## Run Churn-php
+test-churn: start
 	@echo "Run Churn-php"
 	@echo "---------------------------"
 	@echo
 	$(RUN) bin/churn run --configuration=$(CHURN_FILE)
 	@echo
+
+## Run PhpDeprecationDetector
+test-phpdd: start
 	@echo "Run PhpDeprecationDetector"
 	@echo "---------------------------"
 	@echo
 	$(RUN) bin/phpdd src/ tests/
 	@echo
+
+## Run Deptrac
+test-deptrac: start
 	@echo "Run Deptrac"
 	@echo "---------------------------"
 	@echo

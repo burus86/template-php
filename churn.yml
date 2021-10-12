@@ -25,19 +25,18 @@ commitsSince: One year ago
 # Also supports regular expressions.
 # Default: All PHP files in the path provided to churn-php are processed.
 filesToIgnore:
-    - src/Commands/ChurnCommand.php
-    - src/Results/ResultsParser.php
-    - src/Foo/Ba*
+  #- src/Commands/*Command.php
+  - tests/bootstrap.php
 
 # File extensions to use when processing.
 fileExtensions:
-    - php
+  - php
 
 # This list is used only if there is no argument when running churn.
 # Default: <empty>
 directoriesToScan:
-    - src
-    - tests/
+  - src
+  - tests/
 
 # List of user-defined hooks.
 # They can be referenced by their full qualified class name if churn has access to the autoloader.
@@ -45,8 +44,8 @@ directoriesToScan:
 # See below the section about hooks for more details.
 # Default: <empty>
 #hooks:
-    #- Namespace\MyHook
-    #- path/to/my-hook.php
+  #- Namespace\MyHook
+  #- path/to/my-hook.php
 
 # The version control system used for your project.
 # Accepted values: fossil, git, mercurial, subversion, none

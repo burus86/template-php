@@ -31,6 +31,8 @@
 
 ## Set up project
 
+If not already done, [install Docker Compose](https://docs.docker.com/compose/install/) before continue with installation.
+
 ### Installation
 
 Clone repository:
@@ -64,49 +66,52 @@ If you prefer, it's also possible to run each individual test following the inst
 
 ### [PHP Unit](https://github.com/sebastianbergmann/phpunit)
 
-    docker exec -it template-php bin/phpunit
+    make test-phpunit
 
 ## Functional Tests
 
 ### [Behat](https://github.com/Behat/Behat)
 
-    docker exec -it template-php bin/behat
+    make test-behat
 
 ## Code Quality Checker Tools
 
 ### [PHP_CodeSniffer](https://github.com/squizlabs/php_codesniffer)
 
-    docker exec -it template-php bin/phpcs src/ tests/
-    docker exec -it template-php bin/phpcbf src/ tests/
+    make test-phpcs
+
+In order to automatically correct coding standard violations, execute:
+
+    make test-phpcbf
 
 ### [PHPStan](https://github.com/phpstan/phpstan)
 
-    docker exec -it template-php bin/phpstan analyse -c phpstan.neon
+    make test-phpstan
 
 ### [PHP Mess Detector](https://github.com/phpmd/phpmd)
 
-    docker exec -it template-php bin/phpmd src/ text phpmd.xml
+    make test-phpmd
 
 ### [PHP Magic Number Detector](https://github.com/povils/phpmnd)
 
-    docker exec -it template-php bin/phpmnd src tests --progress --extensions=all
+    make test-phpmnd
 
 ### [PHP Copy Paste Detector](https://github.com/sebastianbergmann/phpcpd)
 
-    docker exec -it template-php bin/phpcpd ./ --exclude=var --exclude=vendor --fuzzy --min-lines=5
+    make test-phpcpd
 
 ### [Churn-php](https://github.com/bmitch/churn-php)
 
 `churn-php` is a package that helps you identify php files in your project that could be good candidates for refactoring.
 
-    docker exec -it template-php bin/churn run --configuration=churn.yml
+    make test-churn
 
 ### [PhpDeprecationDetector](https://github.com/wapmorgan/PhpDeprecationDetector)
 
-    docker exec -it template-php bin/phpdd src/ tests/
+    make test-phpdd
 
 ## Code Analysis Tools
 
 ### [Deptrac](https://github.com/qossmic/deptrac)
 
-    docker exec -it template-php bin/deptrac analyse
+    make test-deptrac
