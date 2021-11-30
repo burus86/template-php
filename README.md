@@ -2,6 +2,7 @@
 
 1. [About project](#about-project)
 1. [Set up project](#set-up-project)
+   * [Prerequisites](#prerequisites)
    * [Installation](#installation)
    * [Execute project](#execute-project)
    * [Execute all tests](#execute-all-tests)
@@ -19,9 +20,10 @@
    * [PhpDeprecationDetector](#PhpDeprecationDetector)
 1. [Code Analysis Tools](#code-analysis-tools)
    * [Deptrac](#deptrac)
+1. [License](#license)
 
 ## About project
-- [x] PHP 8
+- [x] PHP 8.1
 - [x] Docker
 - [x] Makefile
 - [x] Unit tests: PHP Unit
@@ -31,7 +33,9 @@
 
 ## Set up project
 
-If not already done, [install Docker Compose](https://docs.docker.com/compose/install/) before continue with installation.
+### Prerequisites
+- [Docker & Docker Compose](https://docs.docker.com/compose/install/)
+- [Make](https://www.gnu.org/software/make/): windows users go [here](http://gnuwin32.sourceforge.net/packages/make.htm)
 
 ### Installation
 
@@ -115,3 +119,6 @@ In order to automatically correct coding standard violations, execute:
 ### [Deptrac](https://github.com/qossmic/deptrac)
 
     make test-deptrac
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
