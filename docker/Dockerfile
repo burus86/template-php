@@ -29,6 +29,11 @@ RUN pecl install apcu \
     && docker-php-ext-enable apcu
 COPY php/conf.d/apcu.ini /usr/local/etc/php/conf.d/docker-php-ext-apcu.ini
 
+# Install Xdebug3
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
+COPY php/conf.d/xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+
 RUN apt-get install -y zlib1g-dev libicu-dev g++ \
     && docker-php-ext-configure intl \
     && docker-php-ext-install intl
