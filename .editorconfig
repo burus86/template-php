@@ -1,5 +1,6 @@
-## see https://editorconfig.org/
-## see https://github.com/RehanSaeed/EditorConfig/blob/main/.editorconfig
+# EditorConfig helps developers define and maintain consistent
+# coding styles between different editors and IDEs.
+# See https://editorconfig.org/
 
 root = true
 
@@ -22,6 +23,12 @@ indent_size = 2
 
 [*.md]
 trim_trailing_whitespace = false
+
+[docker-compose*.{yaml,yml}]
+indent_size = 2
+
+[Dockerfile]
+indent_style = tab
 
 [Makefile]
 indent_style = tab

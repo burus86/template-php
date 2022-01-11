@@ -44,5 +44,11 @@
         "squizlabs/php_codesniffer": "^3.6",
         "symfony/phpunit-bridge": "^5.2",
         "wapmorgan/php-deprecation-detector": "^2.0"
+    },
+    "scripts": {
+        "test:coverage-html": [
+            "@putenv XDEBUG_MODE=coverage",
+            "bin/phpunit -c phpunit.xml.dist --color=always --coverage-html=coverage.html"
+        ]
     }
 }
