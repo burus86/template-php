@@ -78,6 +78,15 @@ If you prefer, it's also possible to run each individual test following the inst
 
     make test-behat
 
+You can install a Behat 3 extension plugin called [BehatHtmlFormatterPlugin](https://github.com/dutchiexl/BehatHtmlFormatterPlugin), for generating HTML reports from your test results.
+
+    make require PACKAGE=emuse/behat-html-formatter ENV=--dev
+
+`TODO`: Test [BehatHtmlFormatterPlugin](https://github.com/dutchiexl/BehatHtmlFormatterPlugin)
+
+    docker exec -it template-php bin/behat --format html
+    docker exec -it template-php bin/behat --format html --out public
+
 ## Code Quality Checker Tools
 
 ### [PHP_CodeSniffer](https://github.com/squizlabs/php_codesniffer)
